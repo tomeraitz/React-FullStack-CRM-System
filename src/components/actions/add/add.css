@@ -1,0 +1,38 @@
+.add{
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: repeat(3, 1fr);
+}
+
+.addHeader{
+    display: grid;
+    justify-self: start;
+    font-size: 15px;
+    grid-column: 1/3;
+}
+
+.insideGrid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center
+}
+
+.grey{
+    display: grid;
+    justify-self: center;
+}
+
+.addButton{
+    display: grid;
+    grid-row: 3;
+    align-self: center;
+    justify-self: start;
+    background-color: #f7ce3e;
+    margin-left: 20px;
+    width: 149px;
+    height: 30px;
+    border-radius: 5px;
+    text-align: center;
+    align-content: center;
+    cursor: pointer;
+}

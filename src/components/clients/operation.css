@@ -1,0 +1,37 @@
+.operation{
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    height: 100px;
+}
+
+input{
+    width: 100px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid grey;
+    justify-self: center;
+    align-self: center;
+}
+
+select{
+    width: 100px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid grey;
+    justify-self: start;
+    align-self: center;
+}
+
+.control{
+    justify-self: center;
+    align-self: center;
+}
+
+
+  .chevron{
+      cursor: pointer;
+  }
+
+  .none{
+      display: none;
+  }

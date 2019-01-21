@@ -1,0 +1,43 @@
+.updateAction{
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
+}
+
+.updateHeader{
+    display: grid;
+    justify-self: start;
+    font-size: 15px;
+}
+
+.clientName{
+    display: grid;
+    grid-template-columns: repeat(2, 100px);
+    justify-items: center;
+    align-items: center;
+}
+
+.genralGrid{
+    display: grid;
+    grid-template-columns: repeat(3, 0.5fr);
+    justify-items: center;
+    align-items: center;
+}
+
+.genralSelect{
+    display: grid;
+    justify-self: center;
+}
+
+.genralButton{
+    display: grid;
+    justify-self: start;
+    color: #f7ce3e;
+    cursor: pointer;
+}
+
+.hr{
+    display: grid;
+    border-bottom: 1px grey solid;
+    align-self: flex-start;
+}
+

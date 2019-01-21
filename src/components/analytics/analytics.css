@@ -1,0 +1,126 @@
+.badges{
+    display: grid;
+    grid-template-columns: repeat(4 , 1fr);
+    height: 200px;
+    align-items: center;
+    justify-items: center;
+}
+
+.badget{
+    display: grid;
+    grid-template-columns: repeat(2 , 1fr);
+    grid-template-rows: repeat(2 , 1fr);
+    align-items: center;
+    justify-items: start;
+
+}
+.proprty{
+    font-size: 31px;
+}
+
+
+.title{
+    display: grid;
+    grid-column: 2;
+    align-self: flex-start;
+    font-size: 16px;
+}
+
+.badget-round-grenn{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: #2ecc71;
+    box-shadow: 0px 1px 5px 3px grey;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    justify-self: center;
+}
+
+.badget-round-blue{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: #3498db;
+    box-shadow: 0px 1px 5px 3px grey;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    justify-self: center;
+}
+
+.badget-round-red{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: #e74c3c;
+    box-shadow: 0px 1px 5px 3px grey;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    justify-self: center;
+}
+
+.badget-round-yellow{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: #f1c40f;
+    box-shadow: 0px 1px 5px 3px grey;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    justify-self: center;
+}
+
+.bicon{
+    font-size: 46px;
+    color: white;
+}
+
+.charts{
+    display: grid;
+    grid-template-columns: repeat(4 ,50%);
+    justify-items: center;
+    align-items: center;
+}
+
+.BestSeller{
+    width: 99%;
+    height: 290px;
+}
+
+.countries{
+    width: 99%;
+    height: 290px;
+}
+
+.chaertTitle{
+    text-align: center;
+    font-size: 20px;
+}
+
+.LineLastMonth{
+    display: grid;
+    width: 99%;
+    height: 290px;
+    grid-row: 2;
+    grid-column: 1;
+}
+
+.pie{
+    display: grid;
+    justify-self: flex-start;
+    align-self: flex-start;
+    width: 99%;
+    height: 290px;
+    grid-row: 2;
+    grid-column: 2;
+}
+
+.pieTitle{
+    text-align: center;
+    margin-top: 21px;
+    font-size: 20px;
+}

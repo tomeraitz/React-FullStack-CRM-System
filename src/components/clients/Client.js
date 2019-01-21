@@ -1,0 +1,170 @@
+import React, { Component } from 'react';
+import Operation from './Operation'
+import Table from './Table'
+import axios from 'axios'
+import Popup from './Popup';
+
+class Client extends Component {
+  constructor(){
+    super()
+    this.state = {
+        data : [],
+        clientData : [],
+        pageRange : {
+          firstNumber : 0,
+          lastNumber : 20
+        },
+        isOpen : false,
+        uesrUpdate : {}
+    }
+}
+
+filterUsersByOperation = async (value, operation)=>{
+  //// filter the users
+  await this.getUsers()
+  let users = this.state.data
+  let newUser = []
+  if(operation !== "sold"){
+    users.map(i => {
+      if(i[operation].toLowerCase().includes(value.toLowerCase())){
+          newUser.push(i)
+        }
+      })
+  }
+  
+  else{
+    users.map(i => {
+      if(i.sold){
+          newUser.push(i)
+        }
+      })
+  }
+  let pageRange = this.state.pageRange
+  if(newUser.length < pageRange.lastNumber){
+    pageRange.firstNumber = 0
+    pageRange.lastNumber = 20
+   await this.setState({data : newUser ,pageRange })
+   await this.filter20Users()
+  }
+  else{
+    this.setState({data : newUser })
+    this.filter20Users()
+  }
+   
+}
+
+filter20Users = () =>{
+          let users = this.state.data
+          let firstNumber = this.state.pageRange.firstNumber 
+          let lasttNumber = this.state.pageRange.lastNumber 
+          let clientData = []
+          
+          for(let i = firstNumber; i < lasttNumber; i++){
+            clientData.push(users[i])
+   
+          }
+            this.setState({clientData : clientData})
+  }
+
+ forwardPage = async () =>{
+  let pageRange = this.state.pageRange
+  if(pageRange.lastNumber < this.state.data.length){
+      pageRange.firstNumber += 20
+      pageRange.lastNumber += 20
+      // await this.getUsers()
+      await this.setState({pageRange})
+      await this.filter20Users()
+  }
+}
+
+previewPage =async () =>{
+  let pageRange = this.state.pageRange
+  if(pageRange.firstNumber > 0){
+    pageRange.firstNumber -= 20
+    pageRange.lastNumber -= 20
+    // await this.getUsers()
+    await this.setState({pageRange})
+    await this.filter20Users()
+  }
+}
+
+ getUsers = async () =>{
+  let users =await axios.get('http://localhost:8000/users')
+  await this.setState({data : users.data})
+}
+
+updateUser = async (user) =>{
+  let newUser = await axios.put(`http://localhost:8000/user/${user.id}`, user)
+  let clientData = [...this.state.clientData]
+  let arr = []
+  clientData = clientData.filter(i => i !=undefined)
+ clientData.forEach(user =>{
+          if(user._id == newUser.data._id){
+              arr.push(newUser.data)
+          }
+          else{
+            arr.push(user)
+          }
+      })
+      
+      this.setState({clientData : arr})
+}
+
+async componentDidMount(){
+  await this.getUsers()
+  this.filter20Users()
+}
+
+changeOpenStatus = (bool , firstName , lastName , country , id) =>{
+  if(bool == false){
+    this.setState({isOpen : bool})
+  }
+  else{
+    let uesrUpdate ={
+      id : id,
+      name : firstName,
+      surname : lastName,
+      country : country
+    }
+    this.setState({isOpen : bool , uesrUpdate})
+  }
+} 
+
+openPopUp = () =>{
+    if(this.state.isOpen){
+      return "popup"
+    }
+    else{
+     return "popupNone"
+    }
+}
+
+
+  render() {
+    return (
+      <div className="client">
+
+       <Popup nameOfClass={this.openPopUp()} 
+              changeOpenStatus={this.changeOpenStatus}
+              uesrUpdate={this.state.uesrUpdate}
+              updateUser={this.updateUser}
+        />
+
+        <Operation  range={this.state.pageRange} 
+                    forwardPage={this.forwardPage}
+                    previewPage={this.previewPage}
+                    data={this.state.clientData}
+                    filterUsersByOperation={this.filterUsersByOperation}
+                    filter20Users={this.filter20Users}
+                    getUsers={this.getUsers}
+        />
+        
+        <Table data={this.state.clientData}
+                changeOpenStatus={this.changeOpenStatus}/>
+       
+      </div>
+    );
+  }
+}
+
+export default Client
