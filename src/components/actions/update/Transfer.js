@@ -18,7 +18,7 @@ transfer = () =>{
     alert("Please choose a owner")
   }
   else{
-    this.props.updateOwner({owner : this.state.owner})
+    this.props.updateUserProprty({owner : this.state.owner})
   }
  
 }

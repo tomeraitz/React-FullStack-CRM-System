@@ -31,9 +31,19 @@ class NavBar extends Component {
   render() {
     return (
       <div className="navBar">
-        <div className={this.renderActiveTab("clients")}><Link to="/clients" onClick={this.handelActive}>Clients</Link></div>
-        <div className={this.renderActiveTab("actions")}><Link to="/actions" onClick={this.handelActive}>Actions</Link></div>
-        <div className={this.renderActiveTab("analytics")}><Link to="/analytics" onClick={this.handelActive}>Analytics</Link></div>
+
+        <div className={this.renderActiveTab("clients")}>
+          <Link to="/clients" onClick={this.handelActive}>Clients</Link>
+        </div>
+
+        <div className={this.renderActiveTab("actions")}>
+          <Link to="/actions" onClick={this.handelActive}>Actions</Link>
+        </div>
+
+        <div className={this.renderActiveTab("analytics")}>
+          <Link to="/analytics" onClick={this.handelActive}>Analytics</Link>
+        </div>
+        
       </div>
     );
   }

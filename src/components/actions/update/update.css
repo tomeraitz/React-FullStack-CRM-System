@@ -41,3 +41,12 @@
     align-self: flex-start;
 }
 
+.searchUsers{
+    position: fixed;
+    background-color: white;
+    margin-top: 29px;
+    width: 100px;
+    margin-left: 99px;
+    font-size: 12px;
+    cursor: pointer;
+}

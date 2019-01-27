@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {ResponsiveContainer} from 'recharts';
 import BestSeller from './BestSeller';
 import Countries from './Countries';
 import LineLastMonth from './LineLastMonth';

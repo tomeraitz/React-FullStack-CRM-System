@@ -24,9 +24,9 @@ class Update extends Component {
                      filterUsers={this.props.filterUsers}
                      getUserDetails={this.props.getUserDetails}
           />
-         <Transfer data={this.props.data} updateOwner={this.props.updateOwner} />
-         <Send data={this.props.data} updateEmailType={this.props.updateEmailType}/>
-         <Declare updateSold={this.props.updateSold}/>
+         <Transfer data={this.props.data} updateUserProprty={this.props.updateUserProprty} />
+         <Send data={this.props.data} updateUserProprty={this.props.updateUserProprty}/>
+         <Declare updateUserProprty={this.props.updateUserProprty}/>
       </div>
     );
   }

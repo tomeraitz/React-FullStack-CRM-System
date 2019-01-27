@@ -10,7 +10,7 @@ class ActionMain extends Component {
     this.state = {
         data : [],
         clientData : [],
-        uesrUpdate : {}
+        userID : ""
     }
   }
 
@@ -23,37 +23,19 @@ class ActionMain extends Component {
             newUser.push(i)
           }
         })
-        if(newUser.length == 1){
-          return newUser[0]
-        }
+        return newUser
     }
 
-    updateOwner = async (owner) =>{
-      if(this.state.uesrUpdate._id){
-        await axios.put(`http://localhost:8000/user/${this.state.uesrUpdate._id}`, owner)
+    updateUserProprty = async (proprty) =>{
+      if(this.state.userID){
+        await axios.put(`http://localhost:8000/user/${this.state.userID}`, proprty)
+        alert("The updte was saved")
       }
       else{
         alert("Please choose a client")
       }
     }
 
-    updateEmailType = async (emailTaype) =>{
-      if(this.state.uesrUpdate._id){
-        await axios.put(`http://localhost:8000/user/${this.state.uesrUpdate._id}`, emailTaype)
-      }
-      else{
-        alert("Please choose a client")
-      }
-    }
-
-    updateSold =  async (sold) =>{
-      if(this.state.uesrUpdate._id){
-        await axios.put(`http://localhost:8000/user/${this.state.uesrUpdate._id}`, sold)
-      }
-      else{
-        alert("Please choose a client")
-      }
-    }
 
   getUsers = async () =>{
     let users = await axios.get('http://localhost:8000/users')
@@ -67,9 +49,8 @@ class ActionMain extends Component {
     alert(newUser.name + " was saved")
   } 
 
-  getUserDetails = (uesrUpdate) =>{
-    console.log(uesrUpdate)
-      this.setState({uesrUpdate : uesrUpdate})
+  getUserDetails = (id) =>{
+       this.setState({userID : id})
   }
 
   async componentDidMount(){
@@ -83,9 +64,8 @@ class ActionMain extends Component {
                 filterUsers={this.filterUsers}
                 updateUser={this.updateUser}
                 getUserDetails={this.getUserDetails}
-                updateOwner={this.updateOwner}
-                updateEmailType={this.updateEmailType}
-                updateSold={this.updateSold}/>
+                updateUserProprty={this.updateUserProprty}
+        />
         <div className="hr"></div>
         <Add createUser={this.createUser}/>
       </div>

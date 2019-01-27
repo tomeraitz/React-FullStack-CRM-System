@@ -66,13 +66,27 @@ class Analytics{
         return newarr
     }
 
+    formatDaysToArray(numOfDays , arrayIndex , isSubTract){
+        if(isSubTract){
+            return moment().subtract(numOfDays, 'days').toArray().slice(0,arrayIndex)
+        }
+        else{
+            return moment(numOfDays).toArray().slice(0,arrayIndex)
+        }
+      
+    }
+
+    compareDatesByDays(momentValue , numOfDays){
+       return moment(momentValue).diff(numOfDays , "days") >= 0 
+    }
+
     findCurrentDate(){
         this.date = {
             month : moment().format('MMMM'),
             year : 2018,
-            last30Days : moment().subtract(30, 'days').toArray().slice(0,3),
-            last181Days : moment().subtract(181, 'days').toArray().slice(0,3),
-            lastYear : moment().subtract(365, 'days').toArray().slice(0,3)
+            last30Days : this.formatDaysToArray(60, 3 , true),
+            last181Days : this.formatDaysToArray(181, 3 , true),
+            lastYear : this.formatDaysToArray(365, 3, true)
         }
     }
 
@@ -115,20 +129,23 @@ class Analytics{
 
     salesSinceDate(){
         this.data.map(user => {
-           let userArr =  moment(user.firstContact).toArray().slice(0,3)
-                if(moment(userArr).diff(this.date.last30Days , "days") >= 0 && user.sold){
-                    if(this.objCounterDays[moment(user.firstContact).format('MMM Do')] ){
-                        this.objCounterDays[moment(user.firstContact).format('MMM Do')].counter++
+           let userArr =  this.formatDaysToArray(user.firstContact , 3 ,false)
+           let key = moment(user.firstContact).format('MMM Do')
+
+                if(this.compareDatesByDays(userArr ,this.date.last30Days) && user.sold){
+                    if(this.objCounterDays[key] ){
+                        this.objCounterDays[key].counter++
                     }
                     else{
-                        this.objCounterDays[moment(user.firstContact).format('MMM Do')] ={
-                            dateForChart :  moment(user.firstContact).format('MMM Do'),
+
+                        this.objCounterDays[key] ={
+                            dateForChart :  key,
                             counter : 1,
-                            dateSort :  moment(user.firstContact)}
-                        this.salesOfLast30Days
-                        .push(this.objCounterDays[moment(user.firstContact).format('MMM Do')] )
+                            dateSort :  moment(user.firstContact)
+                            }
+
+                        this.salesOfLast30Days.push(this.objCounterDays[key])
                     }
-                    
                 }
         })
 
@@ -140,21 +157,20 @@ class Analytics{
 
     clientAcquisition(){
         this.data.map(user => {
-            let userArr =  moment(user.firstContact).toArray().slice(0,3)
-                 if(moment(userArr).diff(this.date.last30Days , "days") >= 0){
+            let userArr =  this.formatDaysToArray(user.firstContact , 3 ,false)
+                 if(this.compareDatesByDays(userArr ,this.date.last30Days)){
                      this.pieUsers.data[0].value++
                  }
 
-                 else if(moment(userArr).diff(this.date.last181Days , "days") >= 0){
+                 else if(this.compareDatesByDays(userArr ,this.date.last181Days)){
                     this.pieUsers.data[1].value++
                  }
 
-                 else if(moment(userArr).diff(this.date.lastYear , "days") >= 0){
+                 else if(this.compareDatesByDays(userArr ,this.date.lastYear)){
                     this.pieUsers.data[2].value++
                  }
          })
     }
-
 
     clerData(){
         this.data =[]

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {XAxis, YAxis, CartesianGrid,ComposedChart,Bar,ResponsiveContainer} from 'recharts';
+
 class BestSeller extends Component {
   render() {
       let bestSeller = this.props.bestSeller

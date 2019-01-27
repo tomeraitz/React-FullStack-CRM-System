@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-
-
 class Declare extends Component {
 
   declare = () =>{
-    this.props.updateSold({sold : true})
+    this.props.updateUserProprty({sold : true})
   }
   
   render() {

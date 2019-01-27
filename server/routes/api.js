@@ -23,7 +23,6 @@ router.post('/user', function (req, res) {
 
 router.put('/user/:id', function (req, res) {
     let dataTochange = req.body
-    console.log(dataTochange)
     let id = req.params.id
     User.findByIdAndUpdate(id,{$set:dataTochange}, { new: true }, 
         function (err, user) {

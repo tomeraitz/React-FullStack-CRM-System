@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 class Send extends Component {
   constructor(){
     super()
@@ -7,24 +6,19 @@ class Send extends Component {
       emailType : ""
     }
   }
-
   handleChangeSelect =async (event) =>{
     await this.setState({emailType : event.target.value})
     
 }
-
 send = () =>{
   if(this.state.emailType == ""){
     alert("Please choose a email type")
   }
   else{
-    this.props.updateEmailType({emailType : this.state.emailType})
+    this.props.updateUserProprty({emailType : this.state.emailType})
   }
- 
 }
-  
   render() {
-
     return (
       <div className="sendMail genralGrid">
           <div>Send Mail to : </div>

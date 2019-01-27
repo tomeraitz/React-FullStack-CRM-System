@@ -19,36 +19,58 @@ class Client extends Component {
     }
 }
 
+filterSoldArray = (arr , data) =>{
+  data.map(i => {
+    if(i.sold){
+      arr.push(i)
+      }
+    })
+}
+
+filterByValue = (arr , data , value , operation) => {
+  data.map(i => {
+    if(i[operation].toLowerCase().includes(value.toLowerCase())){
+      arr.push(i)
+      }
+    })
+}
+
+orderRangeOfPag = (pageRange , opertor) =>{
+    if(opertor === "+"){
+      pageRange.firstNumber += 20
+      pageRange.lastNumber += 20
+    }
+    else if(opertor === "-"){
+      pageRange.firstNumber -= 20
+      pageRange.lastNumber -= 20
+    }
+    else{
+      pageRange.firstNumber = 0
+      pageRange.lastNumber = 20
+    }
+}
+
+setStateAndRende = async (newStateVale) =>{
+   await this.setState(newStateVale)
+   await this.filter20Users()
+}
+
 filterUsersByOperation = async (value, operation)=>{
-  //// filter the users
+
   await this.getUsers()
+  let pageRange = this.state.pageRange
   let users = this.state.data
   let newUser = []
-  if(operation !== "sold"){
-    users.map(i => {
-      if(i[operation].toLowerCase().includes(value.toLowerCase())){
-          newUser.push(i)
-        }
-      })
-  }
-  
-  else{
-    users.map(i => {
-      if(i.sold){
-          newUser.push(i)
-        }
-      })
-  }
-  let pageRange = this.state.pageRange
+
+  operation !== "sold" ?
+  this.filterByValue(newUser , users, value , operation) : this.filterSoldArray(newUser , users)
+
   if(newUser.length < pageRange.lastNumber){
-    pageRange.firstNumber = 0
-    pageRange.lastNumber = 20
-   await this.setState({data : newUser ,pageRange })
-   await this.filter20Users()
+    this.orderRangeOfPag(pageRange , "")
+    this.setStateAndRende({data : newUser ,pageRange })
   }
   else{
-    this.setState({data : newUser })
-    this.filter20Users()
+    this.setStateAndRende({data : newUser })
   }
    
 }
@@ -69,22 +91,16 @@ filter20Users = () =>{
  forwardPage = async () =>{
   let pageRange = this.state.pageRange
   if(pageRange.lastNumber < this.state.data.length){
-      pageRange.firstNumber += 20
-      pageRange.lastNumber += 20
-      // await this.getUsers()
-      await this.setState({pageRange})
-      await this.filter20Users()
+    this.orderRangeOfPag(pageRange, "+")
+    this.setStateAndRende({pageRange})
   }
 }
 
 previewPage =async () =>{
   let pageRange = this.state.pageRange
   if(pageRange.firstNumber > 0){
-    pageRange.firstNumber -= 20
-    pageRange.lastNumber -= 20
-    // await this.getUsers()
-    await this.setState({pageRange})
-    await this.filter20Users()
+    this.orderRangeOfPag(pageRange, "-")
+    this.setStateAndRende({pageRange})
   }
 }
 
@@ -98,7 +114,7 @@ updateUser = async (user) =>{
   let clientData = [...this.state.clientData]
   let arr = []
   clientData = clientData.filter(i => i !=undefined)
- clientData.forEach(user =>{
+  clientData.forEach(user =>{
           if(user._id == newUser.data._id){
               arr.push(newUser.data)
           }
