@@ -14,7 +14,7 @@ class Analytics extends Component {
     }
 
 getDataAnalyticts = async () =>{
-        let dataAnalyticts =await axios.get('http://localhost:8000/analytics')
+        let dataAnalyticts =await axios.get('/analytics')
         await this.setState({data : dataAnalyticts.data})
 }
 

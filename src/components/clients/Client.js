@@ -105,12 +105,12 @@ previewPage =async () =>{
 }
 
  getUsers = async () =>{
-  let users =await axios.get('http://localhost:8000/users')
+  let users =await axios.get('/users')
   await this.setState({data : users.data})
 }
 
 updateUser = async (user) =>{
-  let newUser = await axios.put(`http://localhost:8000/user/${user.id}`, user)
+  let newUser = await axios.put(`/user/${user.id}`, user)
   let clientData = [...this.state.clientData]
   let arr = []
   clientData = clientData.filter(i => i !=undefined)
