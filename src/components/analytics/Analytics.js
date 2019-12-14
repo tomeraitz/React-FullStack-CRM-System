@@ -14,7 +14,7 @@ class Analytics extends Component {
     }
 
 getDataAnalyticts = async () =>{
-        let dataAnalyticts =await axios.get('/analytics')
+        let dataAnalyticts =await axios.get('/analytics', {withCredentials: 'include'})
         await this.setState({data : dataAnalyticts.data})
 }
 

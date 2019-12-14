@@ -7,6 +7,7 @@ const Analytics = require('../scripts/Analytics')
 
 
 router.get('/users', function (req, res) {
+    console.log("In users")
     User
     .find({})
     .exec(function (err, users) {

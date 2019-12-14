@@ -28,7 +28,7 @@ class ActionMain extends Component {
 
     updateUserProprty = async (proprty) =>{
       if(this.state.userID){
-        await axios.put(`/user/${this.state.userID}`, proprty)
+        await axios.put(`/user/${this.state.userID}`, proprty, {withCredentials: 'include'})
         alert("The updte was saved")
       }
       else{
@@ -38,14 +38,14 @@ class ActionMain extends Component {
 
 
   getUsers = async () =>{
-    let users = await axios.get('/users')
+    let users = await axios.get('/users', {withCredentials: 'include'})
     await this.setState({data : users.data})
   }
 
   createUser = async (newUser) =>{
     newUser["email"] = ""
     newUser["firstContact"] = new Date()
-    await axios.post('/user' , newUser)
+    await axios.post('/user' , newUser, {withCredentials: 'include'})
     alert(newUser.name + " was saved")
   } 
 
