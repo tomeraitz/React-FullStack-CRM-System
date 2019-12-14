@@ -74,7 +74,7 @@ filterUsersByOperation = async (value, operation)=>{
   }
    
 }
-
+  
 filter20Users = () =>{
           let users = this.state.data
           let firstNumber = this.state.pageRange.firstNumber 
