@@ -32,7 +32,7 @@ app.use(express.static(path.join(__dirname, 'build')));
 //     res.sendFile(path.join(__dirname, 'build', 'index.html'));
 // });
 
-app.use('/.netlify/functions/api', api)
+app.use('/.netlify/functions/server', api)
 
 module.exports = app;
 module.exports.handler = serverless(app);
