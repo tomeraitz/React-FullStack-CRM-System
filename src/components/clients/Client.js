@@ -105,12 +105,12 @@ previewPage =async () =>{
 }
 
 async getUsers(){
-  let users =await axios.get('https://crm-tomer.herokuapp.com/users', {withCredentials: 'include'})
+  let users =await axios.get('.netlify/functions/api/users', {withCredentials: 'include'})
   await this.setState({data : users.data})
 }
 
 updateUser = async (user) =>{
-  let newUser = await axios.put(`https://crm-tomer.herokuapp.com/user/${user.id}`, user, {withCredentials: 'include'})
+  let newUser = await axios.put(`.netlify/functions/api/user/${user.id}`, user, {withCredentials: 'include'})
   let clientData = [...this.state.clientData]
   let arr = []
   clientData = clientData.filter(i => i !=undefined)
