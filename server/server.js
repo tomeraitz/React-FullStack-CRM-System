@@ -1,10 +1,11 @@
 // Server setup
+'use strict'
 const express = require('express')
 const app = express()
 const path = require('path')
-const api = require('./routes/api')
+// const api = require('./routes/api')
 const bodyParser = require('body-parser')
-var cors = require ('cors');
+// var cors = require ('cors');
 const serverless = require("serverless-http");
 const router = express.Router()
 const User = require('./models/User')
@@ -14,43 +15,41 @@ const Analytics = require('./scripts/Analytics')
 const mongoose = require('mongoose')
 mongoose.connect(process.env.CONNECTION_STRING || 'mongodb://localhost:27017/tomerDB', { useNewUrlParser: true })
 
-app.use(bodyParser.urlencoded({ extended: false }))
+// app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-app.use(express.static(path.join(__dirname, 'build')));
+// app.use(express.static(path.join(__dirname, 'build')));
 
 
-router.get('/users', (req, res)  => {
+router.get('/users', function (req, res) {
     console.log("In users")
-    // User
-    // .find({})
-    // .exec((err, users) =>  {
-    //     res.json({ data : users})
-    // })
-
-    res.json({ data : "test"})
+    User
+    .find({})
+    .exec(function (err, users) {
+        res.send(users)
+    })
 })
 
-router.post('/user',(req, res)  => {
+router.post('/user', function (req, res) {
     let data = req.body
     let user = new User(data)
     user.save()
-    res.json({ data : user})
+    res.send(user)
 })
 
-router.put('/user/:id',(req, res)  => {
+router.put('/user/:id', function (req, res) {
     let dataTochange = req.body
     let id = req.params.id
     User.findByIdAndUpdate(id,{$set:dataTochange}, { new: true }, 
-         (err, user) =>  {
+        function (err, user) {
         if (err) return handleError(err);
-        res.json({ data : user});
+        res.send(user);
       })
 })
 
-router.get('/analytics',(req, res)  => {
+router.get('/analytics', function (req, res) {
     User
     .find({})
-    .exec( (err, users) =>  {
+    .exec(function (err, users) {
         const newAnalytics = new Analytics(users)
         newAnalytics.findBestSellers()
         newAnalytics.findBestCountries()
@@ -60,7 +59,7 @@ router.get('/analytics',(req, res)  => {
         newAnalytics.salesSinceDate()
         newAnalytics.clientAcquisition()
         newAnalytics.clerData()
-        res.json({ data : newAnalytics})
+        res.send(newAnalytics)
     })
 })
 
