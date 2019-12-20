@@ -21,11 +21,13 @@ app.use(express.static(path.join(__dirname, 'build')));
 
 router.get('/users', (req, res)  => {
     console.log("In users")
-    User
-    .find({})
-    .exec((err, users) =>  {
-        res.json({ data : users})
-    })
+    // User
+    // .find({})
+    // .exec((err, users) =>  {
+    //     res.json({ data : users})
+    // })
+
+    res.json({ data : "test"})
 })
 
 router.post('/user',(req, res)  => {
