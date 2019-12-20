@@ -28,7 +28,7 @@ class ActionMain extends Component {
 
     updateUserProprty = async (proprty) =>{
       if(this.state.userID){
-        await axios.put(`.netlify/functions/api/user/${this.state.userID}`, proprty, {withCredentials: 'include'})
+        await axios.put(`.netlify/functions/server/user/${this.state.userID}`, proprty, {withCredentials: 'include'})
         alert("The updte was saved")
       }
       else{
@@ -38,14 +38,14 @@ class ActionMain extends Component {
 
 
   getUsers = async () =>{
-    let users = await axios.get('.netlify/functions/api/users', {withCredentials: 'include'})
+    let users = await axios.get('.netlify/functions/server/users', {withCredentials: 'include'})
     await this.setState({data : users.data})
   }
 
   createUser = async (newUser) =>{
     newUser["email"] = ""
     newUser["firstContact"] = new Date()
-    await axios.post('.netlify/functions/api/user' , newUser, {withCredentials: 'include'})
+    await axios.post('.netlify/functions/server/user' , newUser, {withCredentials: 'include'})
     alert(newUser.name + " was saved")
   } 
 

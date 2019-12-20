@@ -14,7 +14,7 @@ class Analytics extends Component {
     }
 
 getDataAnalyticts = async () =>{
-        let dataAnalyticts =await axios.get('.netlify/functions/api/analytics', {withCredentials: 'include'})
+        let dataAnalyticts =await axios.get('.netlify/functions/server/analytics', {withCredentials: 'include'})
         await this.setState({data : dataAnalyticts.data})
 }
 

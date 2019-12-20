@@ -105,12 +105,12 @@ previewPage =async () =>{
 }
 
 async getUsers(){
-  let users =await axios.get('.netlify/functions/api/users', {withCredentials: 'include'})
+  let users =await axios.get('.netlify/functions/server/users', {withCredentials: 'include'})
   await this.setState({data : users.data})
 }
 
 updateUser = async (user) =>{
-  let newUser = await axios.put(`.netlify/functions/api/user/${user.id}`, user, {withCredentials: 'include'})
+  let newUser = await axios.put(`.netlify/functions/server/user/${user.id}`, user, {withCredentials: 'include'})
   let clientData = [...this.state.clientData]
   let arr = []
   clientData = clientData.filter(i => i !=undefined)
