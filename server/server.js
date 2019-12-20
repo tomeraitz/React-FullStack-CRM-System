@@ -19,36 +19,36 @@ app.use(bodyParser.json())
 app.use(express.static(path.join(__dirname, 'build')));
 
 
-router.get('/users', function (req, res) {
+router.get('/users', (req, res)  => {
     console.log("In users")
     User
     .find({})
-    .exec(function (err, users) {
+    .exec((err, users) =>  {
         res.json({ data : users})
     })
 })
 
-router.post('/user', function (req, res) {
+router.post('/user',(req, res)  => {
     let data = req.body
     let user = new User(data)
     user.save()
     res.json({ data : user})
 })
 
-router.put('/user/:id', function (req, res) {
+router.put('/user/:id',(req, res)  => {
     let dataTochange = req.body
     let id = req.params.id
     User.findByIdAndUpdate(id,{$set:dataTochange}, { new: true }, 
-        function (err, user) {
+         (err, user) =>  {
         if (err) return handleError(err);
         res.json({ data : user});
       })
 })
 
-router.get('/analytics', function (req, res) {
+router.get('/analytics',(req, res)  => {
     User
     .find({})
-    .exec(function (err, users) {
+    .exec( (err, users) =>  {
         const newAnalytics = new Analytics(users)
         newAnalytics.findBestSellers()
         newAnalytics.findBestCountries()
