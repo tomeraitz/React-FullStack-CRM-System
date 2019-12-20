@@ -50,4 +50,4 @@ router.get('/analytics', function (req, res) {
 })
 
 
-module.exports = router
+module.exports = api

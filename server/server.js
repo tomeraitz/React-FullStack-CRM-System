@@ -2,7 +2,7 @@
 const express = require('express')
 const app = express()
 const path = require('path')
-const api = require('./server/routes/api')
+const api = require('./routes/api')
 const bodyParser = require('body-parser')
 var cors = require ('cors');
 const serverless = require("serverless-http");
