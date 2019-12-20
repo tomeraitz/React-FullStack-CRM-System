@@ -14,7 +14,7 @@ class Analytics extends Component {
     }
 
 getDataAnalyticts = async () =>{
-        let dataAnalyticts =await axios.get('/analytics', {withCredentials: 'include'})
+        let dataAnalyticts =await axios.get('https://crm-tomer.herokuapp.com/analytics', {withCredentials: 'include'})
         await this.setState({data : dataAnalyticts.data})
 }
 

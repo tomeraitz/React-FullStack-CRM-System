@@ -28,7 +28,7 @@ class ActionMain extends Component {
 
     updateUserProprty = async (proprty) =>{
       if(this.state.userID){
-        await axios.put(`/user/${this.state.userID}`, proprty, {withCredentials: 'include'})
+        await axios.put(`https://crm-tomer.herokuapp.com/user/${this.state.userID}`, proprty, {withCredentials: 'include'})
         alert("The updte was saved")
       }
       else{
@@ -38,14 +38,14 @@ class ActionMain extends Component {
 
 
   getUsers = async () =>{
-    let users = await axios.get('/users', {withCredentials: 'include'})
+    let users = await axios.get('https://crm-tomer.herokuapp.com/users', {withCredentials: 'include'})
     await this.setState({data : users.data})
   }
 
   createUser = async (newUser) =>{
     newUser["email"] = ""
     newUser["firstContact"] = new Date()
-    await axios.post('/user' , newUser, {withCredentials: 'include'})
+    await axios.post('https://crm-tomer.herokuapp.com/user' , newUser, {withCredentials: 'include'})
     alert(newUser.name + " was saved")
   } 
 
