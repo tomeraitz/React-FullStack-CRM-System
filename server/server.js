@@ -24,7 +24,7 @@ router.get('/users', function (req, res) {
     User
     .find({})
     .exec(function (err, users) {
-        res.send(users)
+        res.json({ data : users})
     })
 })
 
@@ -32,7 +32,7 @@ router.post('/user', function (req, res) {
     let data = req.body
     let user = new User(data)
     user.save()
-    res.send(user)
+    res.json({ data : user})
 })
 
 router.put('/user/:id', function (req, res) {
@@ -41,7 +41,7 @@ router.put('/user/:id', function (req, res) {
     User.findByIdAndUpdate(id,{$set:dataTochange}, { new: true }, 
         function (err, user) {
         if (err) return handleError(err);
-        res.send(user);
+        res.json({ data : user});
       })
 })
 
@@ -58,7 +58,7 @@ router.get('/analytics', function (req, res) {
         newAnalytics.salesSinceDate()
         newAnalytics.clientAcquisition()
         newAnalytics.clerData()
-        res.send(newAnalytics)
+        res.json({ data : newAnalytics})
     })
 })
 
