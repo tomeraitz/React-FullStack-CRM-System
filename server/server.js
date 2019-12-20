@@ -7,8 +7,8 @@ const bodyParser = require('body-parser')
 var cors = require ('cors');
 const serverless = require("serverless-http");
 const router = express.Router()
-const User = require('../models/User')
-const Analytics = require('../scripts/Analytics')
+const User = require('./models/User')
+const Analytics = require('./scripts/Analytics')
 
 // Mongoose setup
 const mongoose = require('mongoose')
