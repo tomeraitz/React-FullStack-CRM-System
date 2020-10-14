@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import './App.css';
 import NavBar from './components/main/NavBar'
@@ -7,28 +7,20 @@ import ActionMain from './components/actions/ActionMain'
 import Analytics from './components/analytics/Analytics';
 
 
-class App extends Component {
-  render() {
+function App(){
     return (
       <Router> 
         <div className="App">
         <NavBar />
-        <Switch>
-          <Redirect exact from="/" to="/clients" />
-
-          <Route path="/clients" exact  render={({ match }) => 
-          <Client  />}/> 
-
-          <Route path="/actions" exact  render={({ match }) => 
-          <ActionMain />}/> 
-
-          <Route path="/analytics" exact  render={({ match }) => 
-          <Analytics />}/> 
-        </Switch>
+          <Switch>
+            <Redirect exact from="/" to="/clients" />
+            <Route path="/clients" exact  render={({ match }) => <Client  />}/> 
+            <Route path="/actions" exact  render={({ match }) => <ActionMain />}/> 
+            <Route path="/analytics" exact  render={({ match }) => <Analytics />}/> 
+          </Switch>
        </div>
     </Router>
     );
-  }
 }
 
 export default App;

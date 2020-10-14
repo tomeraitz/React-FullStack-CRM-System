@@ -40,5 +40,12 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "bit": {
+    "env": {
+      "compiler": "bit.envs/compilers/react@1.0.18"
+    },
+    "componentsDefaultDirectory": "components/{name}",
+    "packageManager": "npm"
+  }
 }
