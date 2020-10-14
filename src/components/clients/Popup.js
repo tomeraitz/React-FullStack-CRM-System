@@ -28,7 +28,7 @@ updateUser = () =>{
     lastName ? updatedUserPop.surname = lastName : updatedUserPop.surname = this.props.uesrUpdate.surname
     country ? updatedUserPop.country = country : updatedUserPop.country = this.props.uesrUpdate.country
     let user = {
-        id : this.props.uesrUpdate.id,
+        id : this.props.userUpdate.id,
         name : `${updatedUserPop.name} ${updatedUserPop.surname}`,
         country : updatedUserPop.country
     }
