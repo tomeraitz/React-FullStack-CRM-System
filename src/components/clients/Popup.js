@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import './popup.css'
 
 class Popup extends Component {
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
         this.state = {
             name : "",
             surname : "",
